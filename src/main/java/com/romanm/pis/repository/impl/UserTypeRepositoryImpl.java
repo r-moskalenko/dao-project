@@ -3,7 +3,6 @@ package com.romanm.pis.repository.impl;
 import com.romanm.pis.domain.User;
 import com.romanm.pis.domain.UserType;
 import com.romanm.pis.jdbc.ConnectionPool;
-import com.romanm.pis.repository.UserRepository;
 import com.romanm.pis.repository.UserTypeRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,20 +11,18 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
-public class UserRepositoryImpl implements UserRepository {
+public class UserTypeRepositoryImpl implements UserTypeRepository {
 
-    private static final Logger logger = LogManager.getLogger(UserRepositoryImpl.class);
+    private static final Logger logger = LogManager.getLogger(UserTypeRepositoryImpl.class);
 
     private final ConnectionPool connectionPool;
-    private final UserTypeRepository userTypeRepository;
 
-    public UserRepositoryImpl(ConnectionPool connectionPool, UserTypeRepository userTypeRepository) {
+    public UserTypeRepositoryImpl(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
-        this.userTypeRepository = userTypeRepository;
     }
 
     @Override
-    public User save(User user) {
+    public UserType save(UserType userType) {
         Connection connection = null;
         try {
             connection = connectionPool.getResource();
@@ -37,17 +34,15 @@ public class UserRepositoryImpl implements UserRepository {
         Long userId = 0L;
         String SQL_SELECT;
 
-        if (user.getUserType() != null) {
-            UserType userType = user.getUserType();
-            userType = userTypeRepository.save(userType);
+        if (userType.getDescription() != null) {
+            SQL_INSERT = "insert into user_types (name, description) values (?, ?)";
 
-            SQL_INSERT = "insert into users (name, user_type_id) values (?, ?)";
-            executeUpdate(connection, SQL_INSERT, user.getName(), userType.getId());
-            SQL_SELECT = String.format("select id from users where name = '%s' and user_type_id = '%d'", user.getName(), userType.getId());
+            executeUpdate(connection, SQL_INSERT, userType.getName(), userType.getDescription());
+            SQL_SELECT = String.format("select id from user_types where name = '%s' and description = '%s'", userType.getName(), userType.getDescription());
         } else {
-            SQL_INSERT = "insert into users (name) values (?)";
-            executeUpdate(connection, SQL_INSERT, user.getName());
-            SQL_SELECT = String.format("select id from users where name = '%s' and user_type_id is null", user.getName());
+            SQL_INSERT = "insert into user_types (name) values (?)";
+            executeUpdate(connection, SQL_INSERT, userType.getName());
+            SQL_SELECT = String.format("select id from user_types where name = '%s' and description is null", userType.getName());
         }
 
         logger.info("insert query = " + SQL_INSERT);
@@ -60,9 +55,9 @@ public class UserRepositoryImpl implements UserRepository {
         } catch(Exception e) {
             logger.error(e.getMessage());
         }
-        user.setId(userId);
+        userType.setId(userId);
 
-        return user;
+        return userType;
     }
 
     private Long selectUserIdByQuery(String query) throws Exception {
@@ -72,7 +67,9 @@ public class UserRepositoryImpl implements UserRepository {
                 if (resultSet.next()) {
                     return resultSet.getLong("id");
                 } else {
-                    throw new Exception("Inserted element not found.");
+                    String message = "Inserted element not found.";
+                    logger.error(message);
+                    throw new Exception(message);
                 }
             }
         }
@@ -100,7 +97,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findUserById(Long id) {
+    public Optional<User> findUserTypeById(Long id) {
         return Optional.empty();
     }
 

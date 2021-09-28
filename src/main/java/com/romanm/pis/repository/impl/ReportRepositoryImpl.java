@@ -13,9 +13,8 @@ public class ReportRepositoryImpl implements ReportRepository {
     private ConnectionPool connectionPool;
     private JdbcConnectionOptions jdbcConnectionOptions;
 
-    public ReportRepositoryImpl(ConnectionPool connectionPool, JdbcConnectionOptions jdbcConnectionOptions) {
+    public ReportRepositoryImpl(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
-        this.jdbcConnectionOptions = jdbcConnectionOptions;
     }
 
     @Override
