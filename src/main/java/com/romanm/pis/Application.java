@@ -32,15 +32,28 @@ public class Application {
         UserTypeRepository userTypeRepository = new UserTypeRepositoryImpl(connectionPool);
         UserRepository userRepository = new UserRepositoryImpl(connectionPool, userTypeRepository);
 
-        UserType admin = new UserType();
-        admin.setName("admin");
-        User user = new User();
-        user.setUserType(admin);
-        user.setName("Oliver Cromwell");
+        UserType adminType = new UserType();
+        adminType.setName("admin");
 
-        user = userRepository.save(user);
+        UserType regularUser = new UserType();
+        regularUser.setName("regular_user");
 
-        logger.info(user);
+        User user1 = new User();
+        user1.setUserType(adminType);
+        user1.setName("Oliver Cromwell");
+
+        User user2 = new User();
+        user2.setUserType(adminType);
+        user2.setName("Robert Cromwell");
+
+        user1 = userRepository.save(user1);
+        user2 = userRepository.save(user2);
+
+        logger.info(adminType);
+        logger.info(user1);
+
+        logger.info(regularUser);
+        logger.info(user2);
     }
 
     private static Properties loadPropertiesFromResource(String resourceName) throws IOException {
