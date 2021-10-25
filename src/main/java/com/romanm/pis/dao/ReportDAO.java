@@ -1,11 +1,11 @@
-package com.romanm.pis.repository;
+package com.romanm.pis.dao;
 
 import com.romanm.pis.domain.Report;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ReportRepository {
+public interface ReportDAO {
     Report save(Report report);
 
     Optional<Report> findById(Long id);
