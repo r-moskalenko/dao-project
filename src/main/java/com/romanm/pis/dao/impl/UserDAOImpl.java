@@ -7,11 +7,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public record UserDAOImpl(Connection connection) implements UserDAO {
+public class UserDAOImpl implements UserDAO {
 
     private static final Logger logger = LogManager.getLogger(UserDAOImpl.class);
 
@@ -24,6 +23,11 @@ public record UserDAOImpl(Connection connection) implements UserDAO {
     private final static String USER_FIND_ALL_QUERY =
             "select * from users;";
 
+    private final Connection connection;
+
+    public UserDAOImpl(Connection connection) {
+        this.connection = connection;
+    }
     @Override
     public User save(User user) {
         if (user.getId() == null) {
@@ -76,32 +80,24 @@ public record UserDAOImpl(Connection connection) implements UserDAO {
                              USER_FIND_BY_ID_QUERY)) {
             pst.setLong(1, id);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                user = loadUser(rs);
-            }
+            UserMapper userMapper = new UserMapper();
+            user = userMapper.extractUserFromResultSet(rs);
         } catch (SQLException e) {
             logger.debug("Get user by id=" + id + " sql exception : " + e.getMessage());
         }
         return Optional.ofNullable(user);
     }
 
-    private User loadUser(ResultSet rs) throws SQLException {
-        UserMapper userMapper = new UserMapper();
-        return userMapper.extractFromResultSet(rs);
-    }
-
     @Override
     public List<User> findAll() {
-        List<User> users = new ArrayList<>();
+        List<User> users = null;
         logger.info("Try to find all users");
         try (PreparedStatement pst =
                      connection.prepareStatement(
                              USER_FIND_ALL_QUERY)) {
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                User event = loadUser(rs);
-                users.add(event);
-            }
+            UserMapper userMapper = new UserMapper();
+            users = userMapper.extractUsersFromResultSet(rs);
         } catch (SQLException e) {
             logger.debug("Get all users sql exception : " + e.getMessage());
         }

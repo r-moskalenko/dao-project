@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public record UserTypeDAOImpl(Connection connection) implements UserTypeDAO {
+public class UserTypeDAOImpl implements UserTypeDAO {
 
     private static final Logger logger = LogManager.getLogger(UserTypeDAOImpl.class);
 
@@ -23,6 +23,12 @@ public record UserTypeDAOImpl(Connection connection) implements UserTypeDAO {
             "select * from user_types where id=?;";
     private final static String USER_TYPE_FIND_ALL_QUERY =
             "select * from user_types;";
+
+    private final Connection connection;
+
+    public UserTypeDAOImpl(Connection connection) {
+        this.connection = connection;
+    }
 
     @Override
     public UserType save(UserType userType) {

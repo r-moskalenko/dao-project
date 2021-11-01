@@ -10,9 +10,11 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-class ConnectionPoolHolder {
+public class ConnectionPoolHolder {
     private static final Logger logger = LogManager.getLogger(ConnectionPoolHolder.class);
 
+    private final static String MYSQL_DRIVER_CLASS_NAME =
+            Utility.getApplicationProperty("mysql.driver.class.name");
     private final static String MYSQL_URL_CONNECTION_STRING =
             Utility.getApplicationProperty("mysql.url.connection.string");
     private final static String MYSQL_USER = Utility.getApplicationProperty("mysql.user");
@@ -31,6 +33,7 @@ class ConnectionPoolHolder {
     static {
         try{
             BasicDataSource ds = new BasicDataSource();
+            ds.setDriverClassName(MYSQL_DRIVER_CLASS_NAME);
             ds.setUrl(MYSQL_URL_CONNECTION_STRING);
             ds.setUsername(MYSQL_USER);
             ds.setPassword(MYSQL_PASSWORD);

@@ -10,11 +10,14 @@ public class Event {
     @Id
     public Long id;
 
+    @Column(name = "short_description")
+    private String shortDescription;
+
     @Column(name = "date_time")
     private LocalDateTime dateAndTime;
 
-    @Column(name = "description")
-    public String description;
+    @Column(name = "long_description")
+    public String longDescription;
 
     @OneToMany(mappedBy="event")
     private List<Report> reports;
@@ -22,10 +25,11 @@ public class Event {
     public Event() {
     }
 
-    public Event(Long id, LocalDateTime dateAndTime, String description, List<Report> reports) {
+    public Event(Long id, String shortDescription, LocalDateTime dateAndTime, String longDescription, List<Report> reports) {
         this.id = id;
+        this.shortDescription = shortDescription;
         this.dateAndTime = dateAndTime;
-        this.description = description;
+        this.longDescription = longDescription;
         this.reports = reports;
     }
 
@@ -37,6 +41,14 @@ public class Event {
         this.id = id;
     }
 
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
     public LocalDateTime getDateAndTime() {
         return dateAndTime;
     }
@@ -45,12 +57,12 @@ public class Event {
         this.dateAndTime = dateAndTime;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLongDescription() {
+        return longDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLongDescription(String description) {
+        this.longDescription = description;
     }
 
     public List<Report> getReports() {
@@ -66,7 +78,7 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", dateAndTime=" + dateAndTime +
-                ", description='" + description + '\'' +
+                ", description='" + longDescription + '\'' +
                 ", reports=" + reports +
                 '}';
     }

@@ -1,0 +1,126 @@
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	
++++ b/pom.xml	(date 1635465780643)
+@@ -9,8 +9,8 @@
+     <version>1.0-SNAPSHOT</version>
+ 
+     <properties>
+-        <maven.compiler.source>16</maven.compiler.source>
+-        <maven.compiler.target>16</maven.compiler.target>
++        <maven.compiler.source>11</maven.compiler.source>
++        <maven.compiler.target>11</maven.compiler.target>
+     </properties>
+ 
+     <dependencies>
+@@ -68,85 +68,36 @@
+     </dependencies>
+ 
+     <build>
+-        <finalName>xzair-rest</finalName>
+-        <scriptSourceDirectory>src/main/java</scriptSourceDirectory>
+-        <resources>
+-            <resource>
+-                <directory>src/main/resources/${env}</directory>
+-                <filtering>true</filtering>
+-            </resource>
+-            <resource>
+-                <directory>src/main/resources</directory>
+-                <filtering>true</filtering>
+-                <excludes>
+-                    <exclude>dev/*</exclude>
+-                    <exclude>devtest/*</exclude>
+-                    <exclude>prod/*</exclude>
+-                </excludes>
+-            </resource>
+-            <resource>
+-                <directory>src/main/java</directory>
+-                <filtering>true</filtering>
+-                <includes>
+-                    <include>**/*.xml</include>
+-                </includes>
+-            </resource>
+-        </resources>
+         <plugins>
+             <plugin>
+                 <artifactId>maven-war-plugin</artifactId>
+                 <configuration>
+-                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+-                    <failOnMissingWebXml>false</failOnMissingWebXml>
++                    <archiveClasses>true</archiveClasses>
+                     <webResources>
+-                        <resource>
+-                            <directory>src/main/resources/${env}</directory>
+-                            <targetPath>WEB-INF/classes</targetPath>
+-                            <filtering>true</filtering>
+-                        </resource>
+-                        <resource>
+-                            <directory>src/main/resources</directory>
+-                            <filtering>true</filtering>
+-                            <excludes>
+-                                <exclude>dev/*</exclude>
+-                                <exclude>devtest/*</exclude>
+-                                <exclude>prod/*</exclude>
+-                            </excludes>
+-                        </resource>
+-                        <resource>
+-                            <directory>${project.basedir}/src/main/resources/lib</directory>
+-                            <targetPath>WEB-INF/lib</targetPath>
+-                            <filtering>false</filtering>
+-                            <includes>
+-                                <include>**/*.jar</include>
+-                            </includes>
+-                        </resource>
+                     </webResources>
+                 </configuration>
+             </plugin>
+             <plugin>
+-                <groupId>org.apache.maven.plugins</groupId>
+-                <artifactId>maven-resources-plugin</artifactId>
+-                <configuration>
+-                    <encoding>UTF-8</encoding>
+-                    <! - filter suffix pem, pfx certificate file ->
+-                    <nonFilteredFileExtensions>
+-                        <nonFilteredFileExtension>pem</nonFilteredFileExtension>
+-                        <nonFilteredFileExtension>pfx</nonFilteredFileExtension>
+-                        <nonFilteredFileExtension>p12</nonFilteredFileExtension>
+-                    </nonFilteredFileExtensions>
+-                </configuration>
+-            </plugin>
+-            <plugin>
+-                <groupId>org.apache.tomcat.maven</groupId>
+-                <artifactId>tomcat7-maven-plugin</artifactId>
+-                <version>2.2</version>
+-                <configuration>
+-                    <path>/xzair-rest</path>
+-                    <charset>UTF-8</charset>
+-                    <port>8082</port>
+-                    <uriEncoding>UTF-8</uriEncoding>
+-                </configuration>
++                <artifactId>maven-jar-plugin</artifactId>
++                <executions>
++                    <execution>
++                        <id>default-jar</id>
++                        <phase>compile</phase>
++                        <goals>
++                            <goal>jar</goal>
++                        </goals>
++                        <configuration>
++                            <packaging>jar</packaging>
++                            <generatePom>true</generatePom>
++                            <artifactId>${project.artifactId}</artifactId>
++                            <groupId>${project.groupId}</groupId>
++                            <version>${project.version}</version>
++                            <file>
++                                ${project.build.directory}/${project.artifactId}-${project.version}.jar
++                            </file>
++                        </configuration>
++                    </execution>
++                </executions>
+             </plugin>
+         </plugins>
+     </build>

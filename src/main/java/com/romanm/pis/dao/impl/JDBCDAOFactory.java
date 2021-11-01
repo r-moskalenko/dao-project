@@ -34,11 +34,11 @@ public class JDBCDAOFactory extends DAOFactory {
 
     @Override
     public UserDAO createUserDao() {
-        return null;
+        return new UserDAOImpl(getConnection());
     }
 
     @Override
     public UserTypeDAO createUserTypeDao() {
-        return null;
+        return new UserTypeDAOImpl(getConnection());
     }
 }

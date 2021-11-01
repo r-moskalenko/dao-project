@@ -28,9 +28,9 @@ public class Application {
         Properties applicationProperties = loadPropertiesFromResource("application.properties");
 
         JdbcConnectionOptions jdbcConnectionOptions = new JdbcConnectionOptions(
-                applicationProperties.getProperty("database.url"),
-                applicationProperties.getProperty("database.user"),
-                applicationProperties.getProperty("database.password"));
+                applicationProperties.getProperty("mysql.url.connection.string"),
+                applicationProperties.getProperty("mysql.user"),
+                applicationProperties.getProperty("mysql.password"));
 
         ConnectionPool connectionPool = new ConnectionPoolImpl(jdbcConnectionOptions);
         UserTypeDAO userTypeDAO = new UserTypeDAOImpl(connectionPool.getResource());
@@ -65,7 +65,7 @@ public class Application {
         logger.info(user2);
 
         Event event1 = new Event();
-        event1.setDescription("PIS lecture");
+        event1.setLongDescription("PIS lecture");
         event1.setDateAndTime(LocalDateTime.now());
         event1 = eventDAO.save(event1);
 

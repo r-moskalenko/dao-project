@@ -29,6 +29,12 @@ public class Utility implements ApplicationConstants {
         ResourceBundle bundle = ResourceBundle.getBundle(
                 APP_PROPERTIES_BUNDLE_NAME,
                 new Locale(APP_DEFAULT_LANGUAGE));
-        return bundle.getString(property);
+        try {
+            return bundle.getString(property);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+
+        return "";
     }
 }
