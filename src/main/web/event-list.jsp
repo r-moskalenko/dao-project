@@ -22,7 +22,7 @@
   <link href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="${pageContext.servletContext.contextPath}/css/carousel.css" rel="stylesheet">
+  <link href="${pageContext.servletContext.contextPath}/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -37,7 +37,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="${pageContext.request.contextPath}">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
@@ -61,7 +61,17 @@
 
   <div class="container marketing">
 
-    <hr class="featurette-divider">
+    <div class="container-md">
+      <div class="row">
+        <div class="col-md-7 justify-content-end my-md-5">
+          <a href="${pageContext.servletContext.contextPath}/api/createEvent" type="button" class="btn btn-primary">
+          New event
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="text-center">List of events</h1>
 
     <c:forEach var="event" items="${listEvents}" varStatus="status">
       <div class="row featurette ">

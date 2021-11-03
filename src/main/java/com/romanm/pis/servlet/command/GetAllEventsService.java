@@ -11,20 +11,16 @@ import java.io.IOException;
 import java.util.List;
 
 public class GetAllEventsService implements Command {
-    /**
-     * @param request
-     * @param response
-     * @return address to go after command execution
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
         List<Event> events = eventDAO.findAll();
         request.setAttribute("listEvents", events);
         request.getServletContext().getRequestDispatcher("/event-list.jsp").forward(request, response);
+    }
 
-        return "/event-list.jsp";
+    @Override
+    public void post(HttpServletRequest request, HttpServletResponse response) {
+
     }
 }
