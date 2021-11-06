@@ -1,0 +1,8 @@
+.card-input {
+    background: #f7f8f7;
+    border: 0.0625em solid #c4cfc4;
+    border-radius: 0.3em;
+    margin: 0.25em;
+    padding: 0.5em 1em;
+    width: 100%;
+}

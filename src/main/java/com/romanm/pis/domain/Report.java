@@ -11,6 +11,9 @@ public class Report {
     @Column(name = "topic")
     private String topic;
 
+    @Column(name = "text")
+    private String text;
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
@@ -43,6 +46,14 @@ public class Report {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public User getUser() {

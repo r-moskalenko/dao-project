@@ -10,5 +10,7 @@ public interface ReportDAO {
 
     Optional<Report> findById(Long id);
 
+    List<Report> findAllByEventId(Long eventId);
+
     List<Report> findAll();
 }

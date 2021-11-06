@@ -34,6 +34,6 @@ public class CreateEventService implements Command {
 
         eventDAO.save(event);
 
-        response.sendRedirect("getAllEvents");
+        response.sendRedirect("events");
     }
 }

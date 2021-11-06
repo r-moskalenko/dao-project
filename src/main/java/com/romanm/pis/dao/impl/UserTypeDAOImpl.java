@@ -82,18 +82,12 @@ public class UserTypeDAOImpl implements UserTypeDAO {
                              USER_TYPE_FIND_BY_ID_QUERY)) {
             pst.setLong(1, id);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                userType = loadUserType(rs);
-            }
+            UserTypeMapper userMapper = new UserTypeMapper();
+            userType = userMapper.extractUserTypeFromResultSet(rs);
         } catch (SQLException e) {
             logger.debug("Get user type by id=" + id + " sql exception : " + e.getMessage());
         }
         return Optional.ofNullable(userType);
-    }
-
-    private UserType loadUserType(ResultSet rs) throws SQLException {
-        UserTypeMapper userMapper = new UserTypeMapper();
-        return userMapper.extractFromResultSet(rs);
     }
 
     @Override
@@ -104,10 +98,8 @@ public class UserTypeDAOImpl implements UserTypeDAO {
                      connection.prepareStatement(
                              USER_TYPE_FIND_ALL_QUERY)) {
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                UserType userType = loadUserType(rs);
-                userTypes.add(userType);
-            }
+            UserTypeMapper userMapper = new UserTypeMapper();
+            userTypes = userMapper.extractUserTypesFromResultSet(rs);
         } catch (SQLException e) {
             logger.debug("Get all user types sql exception : " + e.getMessage());
         }

@@ -1,26 +1,25 @@
 <%--
   Created by IntelliJ IDEA.
   User: romanm
-  Date: 02/11/2021
-  Time: 00:11
+  Date: 04/11/2021
+  Time: 22:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>New event</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>List of user types</title>
     <!-- Bootstrap core CSS -->
     <link href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/jquery.datetimepicker.min.css" >
     <!-- Custom styles for this template -->
     <link href="${pageContext.servletContext.contextPath}/css/style.css" rel="stylesheet">
 </head>
 <body>
-
-<h1 class="pt-5 text-center">
-    New event form
-</h1>
-
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="#"> <img src="${pageContext.servletContext.contextPath}/icons/icon.png" alt="Brand name"/> </a>
@@ -30,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -47,37 +46,49 @@
     </nav>
 </header>
 
-<main role="main" class="container-md">
-    <div class="container-md">
-    <form method="post">
-        <div class="row justify-content-center">
-            <div class="col-4 order-1 py-4">
-                <label for="shortDescription" class="form-label">Short description</label>
-                <input type="text" name="shortDescription" class="form-control" id="shortDescription" placeholder="Title of event">
+<main role="main">
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+        <div class="container-md">
+            <div class="row">
+                <div class="col-md-7 justify-content-end my-md-5">
+                    <a href="${pageContext.servletContext.contextPath}/api/createEvent" type="button" class="btn btn-primary">
+                        New event
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-4 order-1 py-2">
-                <label for="dateTime" class="form-label">Date and time of event</label>
-                <input id="dateTime" name="dateTime" class="form-control" type="text" >
-            </div>
-        </div>
+        <h1 class="text-center">List of UserTypes</h1>
 
-        <div class="row justify-content-center">
-            <div class="col-4 py-2">
-                <label for="longDescription" class="form-label">Long description</label>
-                <textarea class="form-control" name="longDescription" id="longDescription" rows="3"></textarea>
-            </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col-4 py-2">
-                <button type="submit" class="btn btn-primary">Create event</button>
-            </div>
-        </div>
-    </form>
-    </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="userType" items="${listUserTypes}" varStatus="status">
+                <tr>
+                    <th scope="row">${userType.id}</th>
+                    <td>${userType.name}</td>
+                    <td>${userType.description}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+
+        <!-- /END THE FEATURETTES -->
+
+    </div><!-- /.container -->
+
 
     <!-- FOOTER -->
     <footer class="container">
@@ -95,13 +106,5 @@
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="${pageContext.servletContext.contextPath}/js/holder.min.js"></script>
-
-
-<script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/jquery.datetimepicker.full.min.js"></script>
-
-<script>
-    jQuery('#dateTime').datetimepicker();
-</script>
 </body>
 </html>

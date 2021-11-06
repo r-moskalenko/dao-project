@@ -5,7 +5,7 @@
   Time: 02:02
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" import="java.util.Random" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html lang="en">
@@ -14,7 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="icons/favicon.ico">
 
   <title>Carousel Template for Bootstrap</title>
 
@@ -25,9 +24,6 @@
   <link href="${pageContext.servletContext.contextPath}/css/style.css" rel="stylesheet">
 </head>
 <body>
-
-
-
 <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="#"> <img src="${pageContext.servletContext.contextPath}/icons/icon.png" alt="Brand name"/> </a>
@@ -73,10 +69,12 @@
 
     <h1 class="text-center">List of events</h1>
 
+    <jsp:useBean id="listEvents" scope="request" type="java.util.ArrayList"/>
     <c:forEach var="event" items="${listEvents}" varStatus="status">
       <div class="row featurette ">
         <div class="col-md-7 <c:if test="${status.index % 2 == 1}">order-md-2</c:if>">
-          <h2 class="featurette-heading">${event.shortDescription} <span class="text-muted">It'll blow your mind.</span></h2>
+          <h2 class="featurette-heading"><a href="events/${event.id}/reports">${event.shortDescription}</a> <span class="text-muted">It'll blow your mind.</span></h2>
+          <input type="hidden" value="${event.id}">
           <p class="lead">${event.longDescription}</p>
         </div>
         <div class="col-md-5 <c:if test="${status.index % 2 == 1}">order-md-1</c:if>">

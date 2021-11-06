@@ -10,6 +10,10 @@ import java.io.IOException;
  * Interface for Command pattern implementation
  */
 public interface Command {
-    void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
-    void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+    default void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+    default void post(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    }
 }
