@@ -28,6 +28,8 @@ public class ReportDAOImpl implements ReportDAO {
             "select * from reports where id=?;";
     private final static String REPORT_FIND_ALL_QUERY =
             "select * from reports;";
+    private final static String REPORT_FIND_ALL_BY_EVENT_ID_QUERY =
+            "select * from reports where event_id=?;";
 
     public ReportDAOImpl(Connection connection) {
         this.connection = connection;
@@ -98,23 +100,38 @@ public class ReportDAOImpl implements ReportDAO {
 
     private Report loadReport(ResultSet rs) throws SQLException {
         ReportMapper reportMapper = new ReportMapper();
-        return reportMapper.extractFromResultSet(rs);
+        return reportMapper.extractReportFromResultSet(rs);
     }
 
     @Override
     public List<Report> findAll() {
-        List<Report> reports = new ArrayList<>();
+        List<Report> reports = null;
         logger.info("Try to find all reports");
         try (PreparedStatement pst =
                      connection.prepareStatement(
                              REPORT_FIND_ALL_QUERY)) {
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                Report report = loadReport(rs);
-                reports.add(report);
-            }
+            ReportMapper reportMapper = new ReportMapper();
+            reports = reportMapper.extractReportsFromResultSet(rs);
         } catch (SQLException e) {
             logger.debug("Get all reports sql exception : " + e.getMessage());
+        }
+        return reports;
+    }
+
+    @Override
+    public List<Report> findAllByEventId(Long eventId) {
+        List<Report> reports = null;
+        logger.info("Try to find reports by EventId");
+        try (PreparedStatement pst =
+                     connection.prepareStatement(
+                             REPORT_FIND_ALL_BY_EVENT_ID_QUERY)) {
+            pst.setLong(1, eventId);
+            ResultSet rs = pst.executeQuery();
+            ReportMapper reportMapper = new ReportMapper();
+            reports = reportMapper.extractReportsFromResultSet(rs);
+        } catch (SQLException e) {
+            logger.debug("Get all reports by event_id sql exception : " + e.getMessage());
         }
         return reports;
     }

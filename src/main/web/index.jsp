@@ -38,7 +38,10 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="api/getAllEvents">Events</a>
+          <a class="nav-link" href="api/events">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="api/getAllUserTypes">User Types</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>

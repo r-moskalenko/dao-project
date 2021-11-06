@@ -18,9 +18,4 @@ public class GetAllUsersService implements Command {
         request.setAttribute("listUsers", users);
         request.getServletContext().getRequestDispatcher("/user-list.jsp").forward(request, response);
     }
-
-    @Override
-    public void post(HttpServletRequest request, HttpServletResponse response) {
-
-    }
 }

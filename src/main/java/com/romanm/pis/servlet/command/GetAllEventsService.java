@@ -18,9 +18,4 @@ public class GetAllEventsService implements Command {
         request.setAttribute("listEvents", events);
         request.getServletContext().getRequestDispatcher("/event-list.jsp").forward(request, response);
     }
-
-    @Override
-    public void post(HttpServletRequest request, HttpServletResponse response) {
-
-    }
 }
