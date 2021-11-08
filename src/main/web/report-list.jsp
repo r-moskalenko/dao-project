@@ -51,10 +51,6 @@
 </header>
 
 <main role="main">
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
     <div class="container marketing">
 
         <div class="container-md">
@@ -71,86 +67,32 @@
         <h1 class="text-center">List of Reports</h1>
 
         <div class="row row-cols-lg-4 ">
-
-<%--            <jsp:useBean id="listReports" scope="request" type="java.util.ArrayList"/>--%>
             <c:forEach var="report" items="${listReports}" varStatus="status">
             <div class="col m-3">
                 <div class="card" style="width: 18rem;">
-                <img src="${pageContext.servletContext.contextPath}/img/rimage1.png" class="card-img-top" alt="...">
+                <img src="${pageContext.servletContext.contextPath}/img/rimage3.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <form method="post">
-                        <input type="hidden" name="reportId" value="${report.id}">
+                        <input type="hidden" name="reportId" class="report-id" value="${report.id}">
                         <h5 class="card-title">${report.topic}</h5>
                         <label>
                             <input type="text" name="reportTopic" placeholder="Enter card title..."
                                    class="card-input card-title-input" style="display: none;">
                         </label>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of the card's content.</p>
+                        <p class="card-text">${report.text}</p>
                         <label>
-                            <textarea type="text" name="reportText" placeholder="Edit new email..."
+                            <textarea type="text" name="reportText"
                                       class="card-input card-text-input" style="display: none;"> </textarea>
                         </label>
                         <button type="button" class="btn btn-primary edit-report">Edit</button>
-                        <input type="submit" class="btn btn-primary submit-report" value="Save" style="display: none;" />
-                    </form>
                 </div>
                 </div>
             </div>
             </c:forEach>
-
-            <div class="col m-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="${pageContext.servletContext.contextPath}/img/rimage2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col m-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="${pageContext.servletContext.contextPath}/img/rimage2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col m-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="${pageContext.servletContext.contextPath}/img/rimage2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col m-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="${pageContext.servletContext.contextPath}/img/rimage2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- /END THE FEATURETTES -->
 
-    </div><!-- /.container -->
+    </div>
 
 
     <!-- FOOTER -->
@@ -169,7 +111,6 @@
 <script>window.jQuery || document.write('<script src="${pageContext.servletContext.contextPath}/js/jquery-slim.min.js"><\/script>')</script>
 <script src="${pageContext.servletContext.contextPath}/js/popper.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="${pageContext.servletContext.contextPath}/js/holder.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/reportList.js"></script>
 </body>

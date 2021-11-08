@@ -13,6 +13,7 @@ public class ReportMapper {
         while (resultSet.next()) {
             report.setId(resultSet.getLong("id"));
             report.setTopic(resultSet.getString("topic"));
+            report.setText(resultSet.getString("text"));
         }
         return report;
     }
@@ -24,6 +25,7 @@ public class ReportMapper {
             report = new Report();
             report.setId(resultSet.getLong("id"));
             report.setTopic(resultSet.getString("topic"));
+            report.setText(resultSet.getString("text"));
             reports.add(report);
         }
         return reports;

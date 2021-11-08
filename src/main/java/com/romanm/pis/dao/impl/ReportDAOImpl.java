@@ -21,9 +21,9 @@ public class ReportDAOImpl implements ReportDAO {
     private final Connection connection;
 
     private final static String INSERT_INTO_REPORTS =
-            "insert into reports(topic, user_id, event_id) value(?, ?, ?);";
+            "insert into reports(topic, text) value(?, ?);";
     private final static String UPDATE_REPORT =
-            "update reports set topic=?, user_id=?, event_id=? where id=?;";
+            "update reports set topic=?, text=? where id=?;";
     private final static String REPORT_FIND_BY_ID_QUERY =
             "select * from reports where id=?;";
     private final static String REPORT_FIND_ALL_QUERY =
@@ -56,8 +56,7 @@ public class ReportDAOImpl implements ReportDAO {
                      connection.prepareStatement(
                              INSERT_INTO_REPORTS)) {
             statement.setString(1, report.getTopic());
-            statement.setLong(2, report.getUser().getId());
-            statement.setLong(3, report.getEvent().getId());
+            statement.setString(2, report.getText());
             statement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Create new report: " + e.getMessage());
@@ -70,14 +69,13 @@ public class ReportDAOImpl implements ReportDAO {
                      connection.prepareStatement(
                              UPDATE_REPORT)) {
             statement.setString(1, report.getTopic());
-            statement.setLong(2, report.getUser().getId());
-            statement.setLong(3, report.getEvent().getId());
-            statement.setLong(4, report.getId());
+            statement.setString(2, report.getText());
+            statement.setLong(3, report.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Create new report: " + e.getMessage());
+            logger.error("Update report: " + e.getMessage());
         }
-        logger.debug("New report : " + report.getTopic() + " was successfully created");
+        logger.debug("Report with id : " + report.getId() + " was successfully updated.");
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.romanm.pis.dao.mapper;
 
-import com.romanm.pis.domain.Report;
 import com.romanm.pis.domain.UserType;
 
 import java.sql.ResultSet;
