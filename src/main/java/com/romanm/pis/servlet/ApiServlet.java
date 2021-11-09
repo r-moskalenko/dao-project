@@ -24,7 +24,7 @@ public class ApiServlet extends HttpServlet {
     Command createEvent = new CreateEventService();
     Command getAllUserTypes = new GetAllUserTypes();
     Command updateReport = new UpdateReportService();
-//    Command addUserRole = new AddUserRoleService();
+    Command createReport = new CreateReportService();
 //    Command deleteUserRole = new DeleteUserRoleService();
 //    Command getAllRequests = new GetAllRequestsService();
 //    Command changeRequestStatus = new ChangeRequestStatusService();
@@ -41,7 +41,7 @@ public class ApiServlet extends HttpServlet {
         hashMap.put("createEvent", createEvent);
         hashMap.put("getAllUserTypes", getAllUserTypes);
         hashMap.put("reports", getAllReports);
-//        hashMap.put("/getAllUsersRoles", getAllUsersRoles);
+        hashMap.put("createReport", createReport);
 //        hashMap.put("/addUserRole", addUserRole);
 //        hashMap.put("/deleteUserRole", deleteUserRole);
 //        hashMap.put("/getAllRequests", getAllRequests);
@@ -60,7 +60,7 @@ public class ApiServlet extends HttpServlet {
         Map<String, Command> hashMap = new HashMap<>();
         hashMap.put("createEvent", createEvent);
         hashMap.put("reports", updateReport);
-//        hashMap.put("updateUserPassword",updatePassword);
+        hashMap.put("createReport", createReport);
 //        hashMap.put("addUserRole",addUserRole);
 //        hashMap.put("changeRequestStatus",changeRequestStatus);
 //        hashMap.put("createRequest",createRequest);

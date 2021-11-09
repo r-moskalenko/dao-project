@@ -21,6 +21,9 @@
     <link href="${pageContext.servletContext.contextPath}/css/reportList.css" rel="stylesheet">
 </head>
 <body>
+
+<c:set var="requestPath" value="${requestScope['javax.servlet.forward.request_uri']}"/>
+
 <header>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="#"> <img src="${pageContext.servletContext.contextPath}/icons/icon.png"
@@ -56,7 +59,7 @@
         <div class="container-md">
             <div class="row">
                 <div class="col-md-7 justify-content-end my-md-5">
-                    <a href="${pageContext.servletContext.contextPath}/api/createEvent" type="button"
+                    <a href="${requestPath}/createReport" type="button"
                        class="btn btn-primary">
                         New report
                     </a>
