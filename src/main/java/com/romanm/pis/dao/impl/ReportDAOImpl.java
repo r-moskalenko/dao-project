@@ -21,7 +21,7 @@ public class ReportDAOImpl implements ReportDAO {
     private final Connection connection;
 
     private final static String INSERT_INTO_REPORTS =
-            "insert into reports(topic, text) value(?, ?);";
+            "insert into reports(topic, text, event_id) value(?, ?, ?);";
     private final static String UPDATE_REPORT =
             "update reports set topic=?, text=? where id=?;";
     private final static String REPORT_FIND_BY_ID_QUERY =
@@ -57,6 +57,7 @@ public class ReportDAOImpl implements ReportDAO {
                              INSERT_INTO_REPORTS)) {
             statement.setString(1, report.getTopic());
             statement.setString(2, report.getText());
+            statement.setLong(3, report.getEvent().getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Create new report: " + e.getMessage());

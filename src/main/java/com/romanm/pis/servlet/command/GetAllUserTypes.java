@@ -13,8 +13,8 @@ import java.util.List;
 public class GetAllUserTypes implements Command {
     @Override
     public void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserTypeDAO eventDAO = DAOFactory.getInstance().createUserTypeDao();
-        List<UserType> userTypes = eventDAO.findAll();
+        UserTypeDAO userTypeDAO = DAOFactory.getInstance().createUserTypeDao();
+        List<UserType> userTypes = userTypeDAO.findAll();
         request.setAttribute("listUserTypes", userTypes);
         request.getServletContext().getRequestDispatcher("/userType-list.jsp").forward(request, response);
     }
