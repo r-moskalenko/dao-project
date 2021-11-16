@@ -14,8 +14,6 @@ public abstract class DAOFactory {
         return daoFactory;
     }
 
-    public abstract EventDAO createEventDao();
-
     public abstract ReportDAO createReportDao();
 
     public abstract UserDAO createUserDao();

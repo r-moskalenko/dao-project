@@ -9,6 +9,7 @@ import com.romanm.pis.domain.Report;
 import com.romanm.pis.dto.ReportDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
@@ -17,6 +18,13 @@ import java.util.List;
 @Service
 public class ReportService {
     private final Logger logger = LoggerFactory.getLogger(UserTypeController.class);
+
+    private final EventDAO eventDAO;
+
+    @Autowired
+    public ReportService(EventDAO eventDAO) {
+        this.eventDAO = eventDAO;
+    }
 
     public List<Report> getAllReports(String eventId) {
         ReportDAO reportDAO = DAOFactory.getInstance().createReportDao();
@@ -27,7 +35,6 @@ public class ReportService {
 
     public void createReport(Long eventId, MultiValueMap<String, String> paramMap) {
         ReportDAO reportDAO = DAOFactory.getInstance().createReportDao();
-        EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
         String reportTopic = paramMap.getFirst("reportTopic");
         String reportText = paramMap.getFirst("reportText");
 

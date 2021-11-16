@@ -43,21 +43,7 @@ public class EventController {
 
     @PostMapping("/events/create")
     public String createEvent(@RequestBody MultiValueMap<String,String> paramMap) {
-        EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
-        String shortDescription = paramMap.getFirst("shortDescription");
-        String dateTime = paramMap.getFirst("dateTime");
-        String longDescription = paramMap.getFirst("longDescription");
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-        assert dateTime != null;
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
-
-        Event event = new Event();
-        event.setShortDescription(shortDescription);
-        event.setDateAndTime(localDateTime);
-        event.setLongDescription(longDescription);
-
-        eventDAO.save(event);
+        eventService.createEvent(paramMap);
 
         return "redirect:/api/events";
     }

@@ -23,30 +23,30 @@ public class CreateReportService implements Command {
     }
     @Override
     public void post(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String[] uriParts = request.getRequestURI().split("/");
-        Long eventId = Long.parseLong(uriParts[uriParts.length - 3]);
-
-        ReportDAO reportDAO = DAOFactory.getInstance().createReportDao();
-        EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
-        String reportTopic = request.getParameter("reportTopic");
-        String reportText = request.getParameter("reportText");
-
-        Event event = null;
-        try {
-             event = eventDAO.findById(eventId)
-                    .orElseThrow(() -> new Exception("Event with Id=" + eventId + " not found"));
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-
-
-        Report report = new Report();
-        report.setTopic(reportTopic);
-        report.setText(reportText);
-        report.setEvent(event);
-
-        reportDAO.save(report);
-
-        response.sendRedirect("events");
+//        String[] uriParts = request.getRequestURI().split("/");
+//        Long eventId = Long.parseLong(uriParts[uriParts.length - 3]);
+//
+//        ReportDAO reportDAO = DAOFactory.getInstance().createReportDao();
+//        EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
+//        String reportTopic = request.getParameter("reportTopic");
+//        String reportText = request.getParameter("reportText");
+//
+//        Event event = null;
+//        try {
+//             event = eventDAO.findById(eventId)
+//                    .orElseThrow(() -> new Exception("Event with Id=" + eventId + " not found"));
+//        } catch (Exception e) {
+//            logger.error(e.getMessage());
+//        }
+//
+//
+//        Report report = new Report();
+//        report.setTopic(reportTopic);
+//        report.setText(reportText);
+//        report.setEvent(event);
+//
+//        reportDAO.save(report);
+//
+//        response.sendRedirect("events");
     }
 }

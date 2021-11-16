@@ -19,21 +19,21 @@ public class CreateEventService implements Command {
 
     @Override
     public void post(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
-        String shortDescription = request.getParameter("shortDescription");
-        String dateTime = request.getParameter("dateTime");
-        String longDescription = request.getParameter("longDescription");
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
-
-        Event event = new Event();
-        event.setShortDescription(shortDescription);
-        event.setDateAndTime(localDateTime);
-        event.setLongDescription(longDescription);
-
-        eventDAO.save(event);
-
-        response.sendRedirect("events");
+//        EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
+//        String shortDescription = request.getParameter("shortDescription");
+//        String dateTime = request.getParameter("dateTime");
+//        String longDescription = request.getParameter("longDescription");
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+//        LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
+//
+//        Event event = new Event();
+//        event.setShortDescription(shortDescription);
+//        event.setDateAndTime(localDateTime);
+//        event.setLongDescription(longDescription);
+//
+//        eventDAO.save(event);
+//
+//        response.sendRedirect("events");
     }
 }

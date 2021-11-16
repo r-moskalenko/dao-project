@@ -13,9 +13,9 @@ import java.util.List;
 public class GetAllEventsService implements Command {
     @Override
     public void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
-        List<Event> events = eventDAO.findAll();
-        request.setAttribute("listEvents", events);
-        request.getServletContext().getRequestDispatcher("/event-list.jsp").forward(request, response);
+//        EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
+//        List<Event> events = eventDAO.findAll();
+//        request.setAttribute("listEvents", events);
+//        request.getServletContext().getRequestDispatcher("/event-list.jsp").forward(request, response);
     }
 }

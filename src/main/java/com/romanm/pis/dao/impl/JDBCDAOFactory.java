@@ -23,11 +23,6 @@ public class JDBCDAOFactory extends DAOFactory {
     }
 
     @Override
-    public EventDAO createEventDao() {
-        return new EventDAOImpl(getConnection());
-    }
-
-    @Override
     public ReportDAO createReportDao() {
         return new ReportDAOImpl(getConnection());
     }
