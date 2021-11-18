@@ -1,11 +1,5 @@
 package com.romanm.pis.controller;
 
-import com.romanm.pis.dao.DAOFactory;
-import com.romanm.pis.dao.EventDAO;
-import com.romanm.pis.dao.ReportDAO;
-import com.romanm.pis.dao.UserTypeDAO;
-import com.romanm.pis.domain.Event;
-import com.romanm.pis.domain.Report;
 import com.romanm.pis.domain.UserType;
 import com.romanm.pis.service.UserTypeService;
 import org.slf4j.Logger;

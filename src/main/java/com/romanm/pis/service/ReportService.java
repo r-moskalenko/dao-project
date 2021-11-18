@@ -1,7 +1,6 @@
 package com.romanm.pis.service;
 
 import com.romanm.pis.controller.UserTypeController;
-import com.romanm.pis.dao.DAOFactory;
 import com.romanm.pis.dao.EventDAO;
 import com.romanm.pis.dao.ReportDAO;
 import com.romanm.pis.domain.Event;
@@ -10,6 +9,7 @@ import com.romanm.pis.dto.ReportDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
@@ -20,21 +20,21 @@ public class ReportService {
     private final Logger logger = LoggerFactory.getLogger(UserTypeController.class);
 
     private final EventDAO eventDAO;
+    private final ReportDAO reportDAO;
 
     @Autowired
-    public ReportService(EventDAO eventDAO) {
+    public ReportService(@Qualifier("eventDAOImplEM") EventDAO eventDAO, ReportDAO reportDAO) {
         this.eventDAO = eventDAO;
+        this.reportDAO = reportDAO;
     }
 
     public List<Report> getAllReports(String eventId) {
-        ReportDAO reportDAO = DAOFactory.getInstance().createReportDao();
         List<Report> reports = reportDAO.findAllByEventId(Long.parseLong(eventId));
 
         return reports;
     }
 
     public void createReport(Long eventId, MultiValueMap<String, String> paramMap) {
-        ReportDAO reportDAO = DAOFactory.getInstance().createReportDao();
         String reportTopic = paramMap.getFirst("reportTopic");
         String reportText = paramMap.getFirst("reportText");
 
@@ -56,7 +56,6 @@ public class ReportService {
     }
 
     public void editReport(ReportDto reportDto) {
-        ReportDAO reportDAO = DAOFactory.getInstance().createReportDao();
         Long reportId = reportDto.getReportId();
         String reportTopic = reportDto.getReportTopic();
         String reportText = reportDto.getReportText();

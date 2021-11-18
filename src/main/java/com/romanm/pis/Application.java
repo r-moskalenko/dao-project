@@ -1,23 +1,10 @@
 package com.romanm.pis;
 
-import com.romanm.pis.dao.EventDAO;
-import com.romanm.pis.dao.impl.EventDAOImpl;
-import com.romanm.pis.domain.Event;
-import com.romanm.pis.domain.User;
-import com.romanm.pis.domain.UserType;
-import com.romanm.pis.jdbc.ConnectionPool;
-import com.romanm.pis.jdbc.ConnectionPoolImpl;
-import com.romanm.pis.jdbc.JdbcConnectionOptions;
-import com.romanm.pis.dao.UserDAO;
-import com.romanm.pis.dao.UserTypeDAO;
-import com.romanm.pis.dao.impl.UserDAOImpl;
-import com.romanm.pis.dao.impl.UserTypeDAOImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDateTime;
 import java.util.Properties;
 
 public class Application {

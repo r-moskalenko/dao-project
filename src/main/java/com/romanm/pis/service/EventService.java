@@ -1,10 +1,10 @@
 package com.romanm.pis.service;
 
-import com.romanm.pis.dao.DAOFactory;
 import com.romanm.pis.dao.EventDAO;
 import com.romanm.pis.domain.Event;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -22,7 +22,7 @@ public class EventService {
     private final EventDAO eventDAO;
 
     @Autowired
-    public EventService(EventDAO eventDAO) {
+    public EventService(@Qualifier("eventDAOImplEM") EventDAO eventDAO) {
         this.eventDAO = eventDAO;
     }
 

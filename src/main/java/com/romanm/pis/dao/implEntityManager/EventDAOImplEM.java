@@ -1,4 +1,4 @@
-package com.romanm.pis.dao.impl;
+package com.romanm.pis.dao.implEntityManager;
 
 import com.romanm.pis.domain.Event;
 import com.romanm.pis.dao.EventDAO;
@@ -14,21 +14,12 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public class EventDAOImpl implements EventDAO {
+public class EventDAOImplEM implements EventDAO {
 
-    private static final Logger logger = LogManager.getLogger(EventDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger(EventDAOImplEM.class);
 
     @PersistenceContext(unitName = "persistenceUnit")
     private EntityManager entityManager;
-
-    private final static String INSERT_INTO_EVENTS =
-            "insert into events(date_time, short_description, long_description) value(?, ?, ?);";
-    private final static String UPDATE_EVENT =
-            "update events set date_time=?, short_description=?, long_description=? where id=?;";
-    private final static String EVENT_FIND_BY_ID_QUERY =
-            "select * from events where id=?;";
-    private final static String EVENT_FIND_ALL_QUERY =
-            "select * from events;";
 
     @Override
     public Event save(Event event) {
@@ -41,13 +32,14 @@ public class EventDAOImpl implements EventDAO {
     public Optional<Event> findById(Long id) {
         Event event = entityManager.find(Event.class, id);
 
+        logger.debug("Find event: " + event);
+
         return Optional.ofNullable(event);
     }
 
     @Override
     public List<Event> findAll() {
-        List<Event> events = entityManager.createQuery("Select e From Event e",
-                Event.class).getResultList();
+        List<Event> events = entityManager.createQuery("Select e From Event e", Event.class).getResultList();
         return events;
     }
 }
