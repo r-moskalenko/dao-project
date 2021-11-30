@@ -22,7 +22,7 @@ public class EventService {
     private final EventDAO eventDAO;
 
     @Autowired
-    public EventService(@Qualifier("eventDAOImplEM") EventDAO eventDAO) {
+    public EventService(@Qualifier("eventDAOImplJpa") EventDAO eventDAO) {
         this.eventDAO = eventDAO;
     }
 

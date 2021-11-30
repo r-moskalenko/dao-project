@@ -3,6 +3,7 @@ package com.romanm.pis.service;
 import com.romanm.pis.dao.UserTypeDAO;
 import com.romanm.pis.domain.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class UserTypeService {
     private final UserTypeDAO userTypeDAO;
 
     @Autowired
-    public UserTypeService(UserTypeDAO userTypeDAO) {
+    public UserTypeService(@Qualifier("userTypeDAOImplJpa") UserTypeDAO userTypeDAO) {
         this.userTypeDAO = userTypeDAO;
     }
 

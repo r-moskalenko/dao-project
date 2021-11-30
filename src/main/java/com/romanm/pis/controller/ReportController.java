@@ -38,8 +38,7 @@ public class ReportController {
     }
 
     @PutMapping("/reports")
-    public void editReport(@RequestBody ReportDto reportDto)
-            throws JsonProcessingException {
+    public void editReport(@RequestBody ReportDto reportDto) {
         reportService.editReport(reportDto);
     }
 

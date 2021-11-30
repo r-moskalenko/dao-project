@@ -23,7 +23,7 @@ public class ReportService {
     private final ReportDAO reportDAO;
 
     @Autowired
-    public ReportService(@Qualifier("eventDAOImplEM") EventDAO eventDAO, ReportDAO reportDAO) {
+    public ReportService(@Qualifier("eventDAOImplJpa") EventDAO eventDAO, @Qualifier("reportDAOImplJpa") ReportDAO reportDAO) {
         this.eventDAO = eventDAO;
         this.reportDAO = reportDAO;
     }
@@ -60,8 +60,7 @@ public class ReportService {
         String reportTopic = reportDto.getReportTopic();
         String reportText = reportDto.getReportText();
 
-        Report report = new Report();
-        report.setId(reportId);
+        Report report = reportDAO.findById(reportId).orElseGet(Report::new);
         report.setTopic(reportTopic);
         report.setText(reportText);
 

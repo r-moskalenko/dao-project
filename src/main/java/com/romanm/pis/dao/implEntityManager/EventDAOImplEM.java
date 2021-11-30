@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,7 @@ public class EventDAOImplEM implements EventDAO {
     @Override
     public List<Event> findAll() {
         List<Event> events = entityManager.createQuery("Select e From Event e", Event.class).getResultList();
+        logger.debug("Retrieved list of events: {}", Arrays.toString(events.toArray()));
         return events;
     }
 }

@@ -41,26 +41,6 @@ public class UserTypeController {
 
     @PostMapping("/user-types/create")
     public String createReport(@RequestParam Long eventId, @RequestBody MultiValueMap<String,String> paramMap) {
-//        ReportDAO reportDAO = DAOFactory.getInstance().createReportDao();
-//        EventDAO eventDAO = DAOFactory.getInstance().createEventDao();
-//        String reportTopic = paramMap.getFirst("reportTopic");
-//        String reportText = paramMap.getFirst("reportText");
-//
-//        Event event = null;
-//        try {
-//            event = eventDAO.findById(eventId)
-//                    .orElseThrow(() -> new Exception("Event with Id=" + eventId + " not found"));
-//        } catch (Exception e) {
-//            logger.error(e.getMessage());
-//        }
-//
-//
-//        Report report = new Report();
-//        report.setTopic(reportTopic);
-//        report.setText(reportText);
-//        report.setEvent(event);
-//
-//        reportDAO.save(report);
 
         return "redirect:/api/reports?eventId=" + eventId;
     }
