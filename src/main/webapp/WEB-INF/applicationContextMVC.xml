@@ -2,46 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-    	http://www.springframework.org/schema/beans/spring-beans.xsd
-    	http://www.springframework.org/schema/context
-    	http://www.springframework.org/schema/context/spring-context.xsd
-    	http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
-
-<!--    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-<!--        <property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
-<!--        <property name="url" value="jdbc:mysql://localhost:3306/conferencedb" />-->
-<!--        <property name="username" value="romanm" />-->
-<!--        <property name="password" value="1111" />-->
-<!--    </bean>-->
-
-<!--    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
-<!--        <property name="entityManagerFactory" ref="emf" />-->
-<!--    </bean>-->
-
-<!--    <tx:annotation-driven transaction-manager="transactionManager" />-->
+                           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
     <context:component-scan base-package="com.romanm.pis"/>
-
-<!--    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-<!--        <property name="dataSource" ref="dataSource" />-->
-<!--        <property name="jpaVendorAdapter">-->
-<!--            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />-->
-<!--        </property>-->
-<!--        <property name="packagesToScan" value="com.romanm.pis" />-->
-<!--        <property name="jpaProperties">-->
-<!--            <props>-->
-<!--                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>-->
-<!--                <prop key="hibernate.max_fetch.depth">3</prop>-->
-<!--                <prop key="hibernate.jdbc.fetch_size">50</prop>-->
-<!--                <prop key="hibernate.jdbc.batch_size">10</prop>-->
-<!--                <prop key="hibernate.show_sql">true</prop>-->
-<!--            </props>-->
-<!--        </property>-->
-<!--    </bean>-->
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceXmlLocation" value="/WEB-INF/classes/META-INF/persistence.xml" />
@@ -54,7 +26,7 @@
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-<!--    <tx:annotation-driven transaction-manager="transactionManager" />-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <context:annotation-config />
 

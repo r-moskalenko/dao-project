@@ -8,6 +8,7 @@ import java.util.List;
 @Table(name = "events")
 public class Event {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
     @Column(name = "short_description")
@@ -79,7 +80,6 @@ public class Event {
                 "id=" + id +
                 ", dateAndTime=" + dateAndTime +
                 ", description='" + longDescription + '\'' +
-                ", reports=" + reports +
                 '}';
     }
 }
